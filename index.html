@@ -15,14 +15,19 @@
                 text-align:center;
             }
             button{
-                width:180px;height:60px;
+                width:160px;height:50px;
+                font-size:1em;
+                vertical-align:middle;
             }
         </style>
     </head>
     <body>
         <p id="titleP"></p>
         <ul id="voteList"></ul>
-        <p class="result"><button onclick="showSelectName()">开始机选</button></p>
+        <p class="result">
+            <button onclick="showList(unitTable)">返回单位列表</button>
+            <button onclick="showSelectName()">开始机选</button>
+        </p>
         <p class="result" id="voteResult">
             <a>[机选结果]</a>
         </p>
@@ -41,15 +46,36 @@
             };
             // 返回随机数
             var getRnd = function(l){
-                var random = Math.floor(Math.random()*(l-1)+1);
-                return random;
+                var test = Math.random();
+                // 正常公式时 random 几乎不为零，所以提升总数加一计算随机数再减一
+                var random = Math.floor(test*(l-0)+1);
+                return random-1;
             };
             // 在列表中随机选取结果
             var selectName = function(o){
-                var rnd = getRnd(getObjectLength(unitTable));
+                // var rnd = getRnd(getObjectLength(unitTable));
+                var rnd = getRnd($('#voteList')[0].children.length);
                 return voteList0[0].childNodes[rnd].innerText;
 
             };
+            // 绑定点击
+            var prepareClick = function(str){
+                if(str){
+                    $('#voteResult')[0].childNodes[1].onclick = function(){
+                        console.log(showArea(this));
+                    };
+                }
+                units = document.getElementsByClassName("unit");
+                for(var i=0;i<units.length;i++){
+                    units[i].onclick = function(){
+                        console.log(showArea(this));
+                    }
+                }
+            }
+            var showArea = function(o){
+                showList(unitTable[o.innerText]);
+                return o.innerText;
+            }
             //// 读取数据
 
             //// 格式化数据
@@ -109,16 +135,29 @@
 
             //// 填充页面列表
             var listArrayItem = null;
-            for(var p in unitTable){
-                listArrayItem = "<li>"+p+"</li>";
-                //voteListArray.push(p);
-                voteList0.append(listArrayItem);
+            var showList = function(obj){
+                voteList0[0].innerHTML = "";
+                if(Array.isArray(obj)){
+                    for(var p in obj){
+                        listArrayItem = "<li class='area'>"+obj[p]+"</li>";
+                        voteList0.append(listArrayItem);
+                    }
+                }
+                else{
+                    for(var p in obj){
+                        listArrayItem = "<li class='unit'>"+p+"</li>";
+                        voteList0.append(listArrayItem);
+                    }
+                }
+                prepareClick();
             }
+            showList(unitTable);
             //// 填充选取结果
             var showSelectName = function(o){
-                $('#voteResult')[0].childNodes[1].innerText = selectName(unitTable);
+                var name = selectName(unitTable);
+                $('#voteResult')[0].childNodes[1].innerText = name;
+                prepareClick(name);
             }
-
         </script>
     </body>
 </html>
