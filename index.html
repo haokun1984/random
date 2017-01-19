@@ -14,7 +14,7 @@
             ul li{
                 line-height:1.7em;
             }
-            p.result{
+            p#unitTitle, p.result{
                 text-align:center;
             }
             p#voteResult{
@@ -28,7 +28,7 @@
         </style>
     </head>
     <body>
-        <p id="titleP"></p>
+        <p id="unitTitle"></p>
         <ul id="voteList"></ul>
         <p class="result">
             <button onclick="showList(unitTable)">返回单位列表</button>
@@ -81,6 +81,7 @@
                 }
             }
             var showArea = function(obj){
+                selectedName = obj.innerText;
                 showList(unitTable[obj.innerText]);
                 console.log("show:"+obj.innerText);
             }
@@ -146,10 +147,11 @@
             var isCreateLink = true;
             var showList = function(obj){
                 voteList0[0].innerHTML = "";
-                $('#voteResult')[0].childNodes[1].innerText = "";
                 if(Array.isArray(obj)){
                     isCreateLink = false;
                     $('#voteResult')[0].childNodes[1].onclick = null;
+                    // $('#unitTitle')[0].innerText = $('#voteResult')[0].childNodes[1].innerText;
+                    $('#unitTitle')[0].innerText = selectedName;
                     for(var p in obj){
                         listArrayItem = "<li class='area'>"+obj[p]+"</li>";
                         voteList0.append(listArrayItem);
@@ -157,22 +159,24 @@
                 }
                 else{
                     isCreateLink = true;
+                    $('#unitTitle')[0].innerText = "";
                     for(var p in obj){
                         listArrayItem = "<li class='unit'>"+p+"</li>";
                         voteList0.append(listArrayItem);
                     }                
                     prepareClick();
                 }
+                $('#voteResult')[0].childNodes[1].innerText = "";
             }
 
             showList(unitTable);
             //// 填充选取结果
+            var selectedName;
             var showSelectName = function(obj){
-                var name = selectName(obj);
-                $('#voteResult')[0].childNodes[1].innerText = name;
+                selectedName = selectName(obj);
+                $('#voteResult')[0].childNodes[1].innerText = selectedName;
                 if(isCreateLink){
-                    console.log("准备链接");
-                    prepareClick(name);
+                    prepareClick(selectedName);
                 }
             }
         </script>
