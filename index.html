@@ -1,0 +1,121 @@
+<DOCTYPE html>
+<html>
+    <head>
+        <title>机选</title>
+        <script src="jquery-3.1.1.min.js"></script>
+        <style>
+            *{font-size:1em;}
+            ul{
+                -moz-column-count:3; 	/* Firefox */
+                -webkit-column-count:3; /* Safari 和 Chrome */
+                column-count:3;
+                list-style-type:none;
+            }
+            p.result{
+                text-align:center;
+            }
+        </style>
+    </head>
+    <body>
+        <p id="titleP"></p>
+        <ul id="voteList"></ul>
+        <p class="result"><button onclick="showSelectName()">开始机选</button></p>
+        <p class="result" id="voteResult">
+            <a>[机选结果]</a>
+        </p>
+        <!-- javascript -->
+        <script>
+            //// 通用方法
+            // 获取对象长度
+            var getObjectLength = function(o){
+                var count = 0;
+                for(var p in o){
+                    if(o.hasOwnProperty(p)){
+                        count++;
+                    }
+                }
+                return count;
+            };
+            // 返回随机数
+            var getRnd = function(l){
+                var random = Math.floor(Math.random()*(l-1)+1);
+                return random;
+            };
+            // 在列表中随机选取结果
+            var selectName = function(o){
+                var rnd = getRnd(getObjectLength(unitTable));
+                return voteList0[0].childNodes[rnd].innerText;
+
+            };
+            //// 读取数据
+
+            //// 格式化数据
+            // 初始化对象
+            var unitTable = {
+                "区政府办":["1","2","3"],
+                "区发改局":["1","2","3"],
+                "区科经信局":["1","2","3"],
+                "区教育局":["1","2","3"],
+                "区公安分局":["1","2","3"],
+                "区民政局":["1","2","3"],
+                "区司法局":["1","2","3"],
+                "区财政局":["1","2","3"],
+                "区人社局":["1","2","3"],
+                "区国土局":["1","2","3"],
+                "区环保局":["1","2","3"],
+                "区建设局（区人防办）":["1","2","3"],
+                "区规划局":["1","2","3"],
+                "区城管局":["1","2","3"],
+                "区交通局":["1","2","3"],
+                "区水务局":["1","2","3"],
+                "区农林局":["1","2","3"],
+                "区商务投促局":["1","2","3"],
+                "区文体广新旅游局":["1","2","3"],
+                "区卫计局":["1","2","3"],
+                "区审计局":["1","2","3"],
+                "区市场和质量监管局":["1","2","3"],
+                "区安监局":["1","2","3"],
+                "区统计局":["1","2","3"],
+                "区房管局":["1","2","3"],
+                "区档案局":["1","2","3"],
+                "区供销联社":["1","2","3"],
+                "区地志办":["1","2","3"],
+                "区旅发中心":["1","2","3"],
+                "区机关事务中心":["1","2","3"],
+                "区政务中心":["1","2","3"],
+                "区交易中心":["1","2","3"],
+                "区工管委":["1","2","3"],
+                "港管委":["1","2","3"],
+                "大弯街道":["1","2","3"],
+                "红阳街道":["1","2","3"],
+                "弥牟镇":["1","2","3"],
+                "城厢镇":["1","2","3"],
+                "大同镇":["1","2","3"],
+                "祥福镇":["1","2","3"],
+                "清泉镇":["1","2","3"],
+                "姚渡镇":["1","2","3"],
+                "龙王镇":["1","2","3"],
+                "福洪镇":["1","2","3"],
+                "人和乡":["1","2","3"]
+            };
+            // 声明数据对象的数组变量
+            //var voteListArray = []
+
+            //// 获取页面列表元素
+            var voteList0 = $('#voteList');
+
+            //// 填充页面列表
+            var listArrayItem = null;
+            for(var p in unitTable){
+                listArrayItem = "<li>"+p+"</li>";
+                //voteListArray.push(p);
+                voteList0.append(listArrayItem);
+            }
+            //// 填充选取结果
+            var showSelectName = function(o){
+                $('#voteResult')[0].childNodes[1].innerText = selectName(unitTable);
+            }
+
+        </script>
+    </body>
+</html>
