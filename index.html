@@ -32,10 +32,10 @@
         <ul id="voteList"></ul>
         <p class="result">
             <button onclick="showList(unitTable)">返回单位列表</button>
-            <button onclick="showSelectName()">开始机选</button>
+            <button onclick="showSelectName(voteList0)">开始机选</button>
         </p>
         <p class="result" id="voteResult">
-            <a>[机选结果]</a>
+            <a id="voteResultLink">[机选结果]</a>
         </p>
         <!-- javascript -->
         <script>
@@ -68,19 +68,21 @@
             var prepareClick = function(str){
                 if(str){
                     $('#voteResult')[0].childNodes[1].onclick = function(){
-                        console.log(showArea(this));
+                        showArea(this);
                     };
                 }
-                units = document.getElementsByClassName("unit");
-                for(var i=0;i<units.length;i++){
-                    units[i].onclick = function(){
-                        console.log(showArea(this));
+                else{
+                    units = document.getElementsByClassName("unit");
+                    for(var i=0;i<units.length;i++){
+                        units[i].onclick = function(){
+                            showArea(this);
+                        }
                     }
                 }
             }
-            var showArea = function(o){
-                showList(unitTable[o.innerText]);
-                return o.innerText;
+            var showArea = function(obj){
+                showList(unitTable[obj.innerText]);
+                console.log("show:"+obj.innerText);
             }
             //// 读取数据
 
@@ -135,34 +137,43 @@
             };
             // 声明数据对象的数组变量
             //var voteListArray = []
-
+            //var resultLink = $('#voteResult')[0].childNodes[1];
             //// 获取页面列表元素
             var voteList0 = $('#voteList');
 
             //// 填充页面列表
             var listArrayItem = null;
+            var isCreateLink = true;
             var showList = function(obj){
                 voteList0[0].innerHTML = "";
+                $('#voteResult')[0].childNodes[1].innerText = "";
                 if(Array.isArray(obj)){
+                    isCreateLink = false;
+                    $('#voteResult')[0].childNodes[1].onclick = null;
                     for(var p in obj){
                         listArrayItem = "<li class='area'>"+obj[p]+"</li>";
                         voteList0.append(listArrayItem);
                     }
                 }
                 else{
+                    isCreateLink = true;
                     for(var p in obj){
                         listArrayItem = "<li class='unit'>"+p+"</li>";
                         voteList0.append(listArrayItem);
-                    }
+                    }                
+                    prepareClick();
                 }
-                prepareClick();
             }
+
             showList(unitTable);
             //// 填充选取结果
-            var showSelectName = function(o){
-                var name = selectName(unitTable);
+            var showSelectName = function(obj){
+                var name = selectName(obj);
                 $('#voteResult')[0].childNodes[1].innerText = name;
-                prepareClick(name);
+                if(isCreateLink){
+                    console.log("准备链接");
+                    prepareClick(name);
+                }
             }
         </script>
     </body>
