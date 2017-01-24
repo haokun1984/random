@@ -4,19 +4,18 @@
         <title>机选程序</title>
         <link rel="stylesheet" type="text/css" href="index.css"></link>
         <script src="jquery-3.1.1.min.js"></script>
+        <script src="data.js"></script>
     </head>
     <body>
-        <p id="tagPath">
-
-        </p>
+        <!-- 开始标记和结束标记之间不要有空白-->
+        <p id="tagPath"></p>
         <p>
             <ul id="tagToBeElected"></ul>
         </p>
-        <p class="tagResult">
-            <button onclick="showSelectName(voteList0[0])">开始机选</button>
-        </p>
         <p>
-            <a>[机选结果]</a>
+            <button onclick="getRndName(jqueryToBeElected[0])">开始机选</button>
+        </p>
+        <p id="tagRndName">
         </p>
         <!-- javascript -->
         <script src="random.js"></script>
