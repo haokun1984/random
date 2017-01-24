@@ -1,19 +1,24 @@
 *{font-size:26px;font-family:微软雅黑, Arial, Helvetica, sans-serif;}
-/*ul{
+ul{
     -moz-column-count:2; 	/* Firefox */
     -webkit-column-count:2; /* Safari 和 Chrome */
     column-count:2;
     list-style-type:none;
-}*/
+}
 ul li{
     /* line-height:1em; */
-    border:1px solid green;
+    /*border:1px solid green;*/
 }
-li.clickable{
+a, li.clickable{
     text-decoration:underline;
 }
 p{
     text-align:center;
+}
+p#tagPath a{
+    /*border:1px solid green;*/
+    padding:0;
+    margin:0 5px;
 }
 button{
     width:320px;height:80px;
