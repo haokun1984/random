@@ -1,0 +1,21 @@
+*{font-size:26px;font-family:微软雅黑, Arial, Helvetica, sans-serif;}
+/*ul{
+    -moz-column-count:2; 	/* Firefox */
+    -webkit-column-count:2; /* Safari 和 Chrome */
+    column-count:2;
+    list-style-type:none;
+}*/
+ul li{
+    /* line-height:1em; */
+    border:1px solid green;
+}
+li.clickable{
+    text-decoration:underline;
+}
+p{
+    text-align:center;
+}
+button{
+    width:320px;height:80px;
+    vertical-align:middle;
+}
