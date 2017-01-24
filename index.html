@@ -1,184 +1,24 @@
 <DOCTYPE html>
 <html>
     <head>
-        <title>机选</title>
+        <title>机选程序</title>
+        <link rel="stylesheet" type="text/css" href="index.css"></link>
         <script src="jquery-3.1.1.min.js"></script>
-        <style>
-            *{font-size:1.2em;font-family:微软雅黑, Arial, Helvetica, sans-serif;}
-            ul{
-                -moz-column-count:2; 	/* Firefox */
-                -webkit-column-count:2; /* Safari 和 Chrome */
-                column-count:2;
-                list-style-type:none;
-            }
-            ul li{
-                line-height:1.7em;
-            }
-            p#unitTitle, p.result{
-                text-align:center;
-            }
-            p#voteResult{
-                font-size:3em;
-            }
-            button{
-                width:320px;height:80px;
-                font-size:1.2em;
-                vertical-align:middle;
-            }
-        </style>
     </head>
     <body>
-        <p id="unitTitle"></p>
-        <ul id="voteList"></ul>
-        <p class="result">
-            <button onclick="showList(unitTable)">返回单位列表</button>
-            <button onclick="showSelectName(voteList0)">开始机选</button>
+        <p id="tagPath">
+
         </p>
-        <p class="result" id="voteResult">
-            <a id="voteResultLink">[机选结果]</a>
+        <p>
+            <ul id="tagToBeElected"></ul>
+        </p>
+        <p class="tagResult">
+            <button onclick="showSelectName(voteList0[0])">开始机选</button>
+        </p>
+        <p>
+            <a>[机选结果]</a>
         </p>
         <!-- javascript -->
-        <script>
-            //// 通用方法
-            // 获取对象长度
-            var getObjectLength = function(o){
-                var count = 0;
-                for(var p in o){
-                    if(o.hasOwnProperty(p)){
-                        count++;
-                    }
-                }
-                return count;
-            };
-            // 返回随机数
-            var getRnd = function(l){
-                var test = Math.random();
-                // 正常公式时 random 几乎不为零，所以提升总数加一计算随机数再减一
-                var random = Math.floor(test*(l-0)+1);
-                return random-1;
-            };
-            // 在列表中随机选取结果
-            var selectName = function(o){
-                // var rnd = getRnd(getObjectLength(unitTable));
-                var rnd = getRnd($('#voteList')[0].children.length);
-                return voteList0[0].childNodes[rnd].innerText;
-
-            };
-            // 绑定点击
-            var prepareClick = function(str){
-                if(str){
-                    $('#voteResult')[0].childNodes[1].onclick = function(){
-                        showArea(this);
-                    };
-                }
-                else{
-                    units = document.getElementsByClassName("unit");
-                    for(var i=0;i<units.length;i++){
-                        units[i].onclick = function(){
-                            showArea(this);
-                        }
-                    }
-                }
-            }
-            var showArea = function(obj){
-                selectedName = obj.innerText;
-                showList(unitTable[obj.innerText]);
-                console.log("show:"+obj.innerText);
-            }
-            //// 读取数据
-
-            //// 格式化数据
-            // 初始化对象
-            var unitTable = {
-                "区政府办":["area01","area46","area91","area136"],
-                "区发改局":["area02","area47","area92","area137"],
-                "区科经信局":["area03","area48","area93","area138"],
-                "区教育局":["area04","area49","area94","area139"],
-                "区公安分局":["area05","area50","area95","area140"],
-                "区民政局":["area06","area51","area96","area141"],
-                "区司法局":["area07","area52","area97","area142"],
-                "区财政局":["area08","area53","area98","area143"],
-                "区人社局":["area09","area54","area99","area144"],
-                "区国土局":["area10","area55","area100","area145"],
-                "区环保局":["area11","area56","area101","area146"],
-                "区建设局（区人防办）":["area12","area57","area102","area147"],
-                "区规划局":["area13","area58","area103","area148"],
-                "区城管局":["area14","area59","area104","area149"],
-                "区交通局":["area15","area60","area105","area150"],
-                "区水务局":["area16","area61","area106","area151"],
-                "区农林局":["area17","area62","area107","area152"],
-                "区商务投促局":["area18","area63","area108","area153"],
-                "区文体广新旅游局":["area19","area64","area109","area154"],
-                "区卫计局":["area20","area65","area110","area155"],
-                "区审计局":["area21","area66","area111","area156"],
-                "区市场和质量监管局":["area22","area67","area112","area157"],
-                "区安监局":["area23","area68","area113","area158"],
-                "区统计局":["area24","area69","area114","area159"],
-                "区房管局":["area25","area70","area115","area160"],
-                "区档案局":["area26","area71","area116","area161"],
-                "区供销联社":["area27","area72","area117","area162"],
-                "区地志办":["area28","area73","area118","area163"],
-                "区旅发中心":["area29","area74","area119","area164"],
-                "区机关事务中心":["area30","area75","area120","area165"],
-                "区政务中心":["area31","area76","area121","area166"],
-                "区交易中心":["area32","area77","area122","area167"],
-                "区工管委":["area33","area78","area123","area168"],
-                "港管委":["area34","area79","area124","area169"],
-                "大弯街道":["area35","area80","area125","area170"],
-                "红阳街道":["area36","area81","area126","area171"],
-                "弥牟镇":["area37","area82","area127","area172"],
-                "城厢镇":["area38","area83","area128","area173"],
-                "大同镇":["area39","area84","area129","area174"],
-                "祥福镇":["area40","area85","area130","area175"],
-                "清泉镇":["area41","area86","area131","area176"],
-                "姚渡镇":["area42","area87","area132","area177"],
-                "龙王镇":["area43","area88","area133","area178"],
-                "福洪镇":["area44","area89","area134","area179"],
-                "人和乡":["area45","area90","area135","area180"]
-            };
-            // 声明数据对象的数组变量
-            //var voteListArray = []
-            //var resultLink = $('#voteResult')[0].childNodes[1];
-            //// 获取页面列表元素
-            var voteList0 = $('#voteList');
-
-            //// 填充页面列表
-            var listArrayItem = null;
-            var isCreateLink = true;
-            var showList = function(obj){
-                voteList0[0].innerHTML = "";
-                if(Array.isArray(obj)){
-                    isCreateLink = false;
-                    $('#voteResult')[0].childNodes[1].onclick = null;
-                    // $('#unitTitle')[0].innerText = $('#voteResult')[0].childNodes[1].innerText;
-                    $('#unitTitle')[0].innerText = selectedName;
-                    for(var p in obj){
-                        listArrayItem = "<li class='area'>"+obj[p]+"</li>";
-                        voteList0.append(listArrayItem);
-                    }
-                }
-                else{
-                    isCreateLink = true;
-                    $('#unitTitle')[0].innerText = "";
-                    for(var p in obj){
-                        listArrayItem = "<li class='unit'>"+p+"</li>";
-                        voteList0.append(listArrayItem);
-                    }                
-                    prepareClick();
-                }
-                $('#voteResult')[0].childNodes[1].innerText = "";
-            }
-
-            showList(unitTable);
-            //// 填充选取结果
-            var selectedName;
-            var showSelectName = function(obj){
-                selectedName = selectName(obj);
-                $('#voteResult')[0].childNodes[1].innerText = selectedName;
-                if(isCreateLink){
-                    prepareClick(selectedName);
-                }
-            }
-        </script>
+        <script src="random.js"></script>
     </body>
 </html>
