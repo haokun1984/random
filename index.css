@@ -1,12 +1,13 @@
 *{font-size:36px;font-family:微软雅黑, Arial, Helvetica, sans-serif;}
 ul{
-    -moz-column-count:2; 	/* Firefox */
-    -webkit-column-count:2; /* Safari 和 Chrome */
-    column-count:2;
+    -moz-column-count:4; 	/* Firefox */
+    -webkit-column-count:4; /* Safari 和 Chrome */
+    column-count:4;
     list-style-type:none;
 }
 ul li{
-    margin:20px 0;
+    display:box;
+    margin:0px 0 30px;
     background-color:#efefee;
 }
 a, li.clickable{
