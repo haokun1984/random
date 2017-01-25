@@ -23,6 +23,7 @@ var setMask = function(){
         $('#tagBtnRndName').removeClass("displaynone");
     }
     else{
+        $('#tagToBeElected li').removeClass("mask");
         $('#tagBtnRndName').addClass("displaynone");
     }
 };
@@ -90,6 +91,7 @@ var startPage = function(){
     });
     jqueryPath.html("");
     jqueryPath.append(home);
+    setMask();
 };
 
 startPage();
