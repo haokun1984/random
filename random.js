@@ -16,7 +16,16 @@ var getRnd = function(length){
     return random-1;
 };
 
-// --- 填充页面元素
+// 遮罩
+var setMask = function(){
+    if($('#tagPath a').length >= 3){
+        $('#tagToBeElected li').addClass("mask");
+        $('#tagBtnRndName').removeClass("displaynone");
+    }
+    else{
+        $('#tagBtnRndName').addClass("displaynone");
+    }
+};
 
 // 获取标签
 var jqueryPath = $('#tagPath');
@@ -42,14 +51,11 @@ var fillUL = function(obj){
                 tagLI.addClass("clickable");
                 // 设置点击事件
                 tagLI.click(function(){
-                    console.log("已点击: "+this.innerHTML);
-                    fillUL(obj[this.innerHTML]);
-                    // 添加路径
+                    // - 刷新路径
                     var tagA = $('<a>');
                     tagA.html(this.innerHTML);
-                    console.log(tagA[0]);
+                    // -- 给路径绑定事件
                     tagA.click(function(){
-                        fillUL(obj[this.innerHTML]); //传入的 obj
                         // 点击 tagPath 时，删除其后的元素
                         var isDelete = false;
                         for(var i=0;i<jqueryPath[0].childNodes.length;i++){
@@ -60,14 +66,18 @@ var fillUL = function(obj){
                                 isDelete = true;
                             }
                         }
-                        console.log(isDelete);
+                        // - 刷新列表
+                        fillUL(obj[this.innerHTML]); //传入的 obj
                     });
                     jqueryPath.append(tagA);
+                    // - 刷新列表
+                    fillUL(obj[this.innerHTML]);
                 });
             }
             jqueryToBeElected.append(tagLI);
         }
     }
+    setMask();
 };
 
 var startPage = function(){
@@ -91,15 +101,13 @@ var getRndName = function(jqueryObj){
     var rnd = getRnd(jqueryObj.children.length);
     var rndName = jqueryObj.childNodes[rnd].innerText;
     $('#tagRndName').html(rndName);
-    return rndName;
-};
-
-//// 填充选取结果
-var selectedName;
-var showSelectName = function(obj){
-    selectedName = selectName(obj);
-    $('#voteResult')[0].childNodes[1].innerText = selectedName;
-    if(isCreateLink){
-        prepareClick(selectedName);
+    var list = $('#tagToBeElected li');
+    setMask();
+    for(var i=0;i<list.length;i++){
+        console.log(list[i]);
+        if(list[i].innerHTML == rndName){
+            console.log(list[i]);
+            list[i].setAttribute("class","");
+        }
     }
-}
+};
