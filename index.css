@@ -9,9 +9,6 @@ ul{
 ul#tagToBeElected li{
     border:10px solid white;
 }
-ul#tagToBeElected li a{
-    background-color:#f0f0f0;
-}
 a.clickable{
     text-decoration:underline;
 }
