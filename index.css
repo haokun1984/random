@@ -1,15 +1,17 @@
 *{font-size:36px;font-family:微软雅黑, Arial, Helvetica, sans-serif;}
 ul{
-    -moz-column-count:2; 	/* Firefox */
-    -webkit-column-count:2; /* Safari 和 Chrome */
-    column-count:2;
+    -moz-column-count:4; 	/* Firefox */
+    -webkit-column-count:4; /* Safari 和 Chrome */
+    column-count:4;
     list-style-type:none;
     overflow: hidden;
 }
 ul#tagToBeElected li{
     border:10px solid white;
 }
-
+ul#tagToBeElected li a{
+    background-color:#f0f0f0;
+}
 a.clickable{
     text-decoration:underline;
 }
