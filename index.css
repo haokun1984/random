@@ -41,6 +41,10 @@ button{
     width:320px;height:80px;
     vertical-align:middle;
 }
+p#tagRndName{
+    color:red;
+    margin:20px 0 0;
+}
 /**/
 .mask{
     background-color:black;
