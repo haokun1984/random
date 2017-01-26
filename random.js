@@ -37,21 +37,22 @@ var fillUL = function(obj){
     jqueryToBeElected.html(""); //清空 tagToBeElected 内容
     if(Array.isArray(obj)){
         for(var i in obj){
-            jqueryToBeElected.append("<li>"+obj[i]+"</li>");
+            jqueryToBeElected.append("<li><a>"+obj[i]+"</a></li>");
         }
     }
     else{
         for(var i in obj){
-            var tagLI = $('<li>');
-            tagLI.html(i);
+            var tagLI = $('<li>'), tagA = $('<a>');
+            tagA.html(i);
+            tagLI.append(tagA);
             if(obj[i] == undefined || obj[i].length == 0 || getObjLength(obj[i]) == 0){
                 // 不加链接
             }
             else{
                 // 给可点击标记 a 增加类: clickable
-                tagLI.addClass("clickable");
+                tagA.addClass("clickable");
                 // 设置点击事件
-                tagLI.click(function(){
+                tagA.click(function(){
                     // - 刷新路径
                     var tagA = $('<a>');
                     tagA.html(this.innerHTML);

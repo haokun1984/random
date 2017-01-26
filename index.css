@@ -4,12 +4,13 @@ ul{
     -webkit-column-count:2; /* Safari 和 Chrome */
     column-count:2;
     list-style-type:none;
+    overflow: hidden;
 }
-ul li{
-    margin:20px 0;
-    background-color:#efefee;
+ul#tagToBeElected li{
+    border:10px solid white;
 }
-a, li.clickable{
+
+a.clickable{
     text-decoration:underline;
 }
 p{
@@ -19,6 +20,7 @@ p#tagPath a{
     /*border:1px solid green;*/
     padding:0;
     margin:0 5px;
+    text-decoration:underline;
 }
 button{
     width:320px;height:80px;
