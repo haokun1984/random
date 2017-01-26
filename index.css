@@ -1,13 +1,23 @@
-*{font-size:36px;font-family:微软雅黑, Arial, Helvetica, sans-serif;}
+*{
+    font-size:36px;font-family:微软雅黑, Arial, Helvetica, sans-serif;
+    padding:0;margin:0;
+}
 ul{
-    -moz-column-count:4; 	/* Firefox */
-    -webkit-column-count:4; /* Safari 和 Chrome */
+/*    
+    -moz-column-count:4;
+    -webkit-column-count:4;
     column-count:4;
+    */
     list-style-type:none;
     overflow: hidden;
+    text-align: center;
 }
 ul#tagToBeElected li{
-    border:10px solid white;
+    border:0px solid white;
+    text-align: left;
+}
+ul#tagToBeElected li a{
+
 }
 a.clickable{
     text-decoration:underline;
@@ -32,3 +42,33 @@ button{
 .displaynone{
     display:none;
 }
+
+/**/
+.flex{
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  flex-flow:row;
+  
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  
+  -webkit-flex-flow: row wrap;
+  justify-content: space-around;
+}
+.flex li{
+    height:200px;width:200px;
+    flex:1;
+}
+
+#tagToBeElected li{
+        /*width: 25%;*/
+        width:200px;
+        display: inline-block;
+        border:1px solid #440239;
+        margin: 1%;
+        vertical-align:top;
+    }

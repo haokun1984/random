@@ -101,14 +101,14 @@ startPage();
 
 // 在列表中随机选取名称，参数：jquery对象
 var getRndName = function(jqueryObj){
+    // jqueryToBeElected[0].childNodes[0].innerText
     var rnd = getRnd(jqueryObj.children.length);
-    var rndName = jqueryObj.childNodes[rnd].innerText;
+    var rndName = jqueryObj.childNodes[rnd].innerText; // <li><a> 的 innerText
     $('#tagRndName').html(rndName);
     var list = $('#tagToBeElected li');
     setMask();
     for(var i=0;i<list.length;i++){
-        console.log(list[i]);
-        if(list[i].innerHTML == rndName){
+        if(list[i].innerText == rndName){
             console.log(list[i]);
             list[i].setAttribute("class","");
         }
