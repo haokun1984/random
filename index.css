@@ -1,5 +1,5 @@
 *{
-    font-size:36px;font-family:微软雅黑, Arial, Helvetica, sans-serif;
+    font-size:42px;font-family:微软雅黑, Arial, Helvetica, sans-serif;
     padding:0;margin:0;
 }
 hr{
@@ -40,6 +40,7 @@ p#tagPath a{
     font-size:48px;
     padding:0;
     margin:0 5px;
+    line-height:250%;
     text-decoration:underline;
 }
 button{
