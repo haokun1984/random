@@ -51,6 +51,7 @@ p#tagPath a{
     text-decoration:underline;
 }
 button{
+    font-size:48px;
     width:320px;height:80px;
     vertical-align:middle;
 }
