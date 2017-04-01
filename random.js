@@ -21,11 +21,13 @@ var getRnd = function(length){
 var setMask = function(){
     if($('#tagPath a').length >= 3){
         $('#tagToBeElected li').addClass("mask");
+        $('#tagToBeElected li').addClass("tsize");
         $('#tagBtnRndName').removeClass("displaynone");
         $('#tagRndName').removeClass("displaynone");
     }
     else{
         $('#tagToBeElected li').removeClass("mask");
+        $('#tagToBeElected li').removeClass("tsize");
         $('#tagBtnRndName').addClass("displaynone");
         $('#tagRndName').addClass("displaynone");
     }
@@ -114,7 +116,7 @@ var getRndName = function(jqueryObj){
     for(var i=0;i<list.length;i++){
         if(list[i].innerText == rndName){
             console.log(list[i]);
-            list[i].setAttribute("class","");
+            list[i].setAttribute("class","tsize");
         }
     }
 };
