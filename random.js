@@ -9,6 +9,7 @@ var getObjLength = function(o){
     }
     return count;
 };
+
 // 返回随机整数，参数：对象长度
 var getRnd = function(length){
     // 正常公式时 random 几乎不为零，所以提升总数加一计算随机数再减一
@@ -21,10 +22,12 @@ var setMask = function(){
     if($('#tagPath a').length >= 3){
         $('#tagToBeElected li').addClass("mask");
         $('#tagBtnRndName').removeClass("displaynone");
+        $('#tagRndName').removeClass("displaynone");
     }
     else{
         $('#tagToBeElected li').removeClass("mask");
         $('#tagBtnRndName').addClass("displaynone");
+        $('#tagRndName').addClass("displaynone");
     }
 };
 
@@ -33,6 +36,7 @@ var jqueryPath = $('#tagPath');
 var jqueryToBeElected = $('#tagToBeElected');
 //
 var fillUL = function(obj){
+    $('#tagRndName').html("...");
     var isCreateLink = true;
     jqueryToBeElected.html(""); //清空 tagToBeElected 内容
     if(Array.isArray(obj)){
